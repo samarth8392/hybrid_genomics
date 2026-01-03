@@ -51,12 +51,6 @@ python $CODEDIR/hybrid_index/summarize_admixed_regions.py \
     --min-hybrid-index 0.1 \
     --merge-distance 100000
 
-# python $CODEDIR/hybrid_index/plot_hybrid_index.py \
-#     --input $MAINDIR/hybrid_index_output/hybrid_index_windows.txt \
-#     --output-summary $MAINDIR/hybrid_index_output/hybrid_index_summary.pdf \
-#     --output-individual $MAINDIR/hybrid_index_output/hybrid_index_individuals.pdf \
-#     --width 16 --height 6 --dpi 300
-
 # Basic usage - top 10 peaks with highest hybrid index
 python $CODEDIR/hybrid_index/plot_hybrid_index.py \
     --input $MAINDIR/hybrid_index_output/hybrid_index_windows.txt \
