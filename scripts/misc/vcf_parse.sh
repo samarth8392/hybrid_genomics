@@ -1,10 +1,10 @@
 #!/bin/sh -l
 #SBATCH -A PAS1533
 #SBATCH -N 1
-#SBATCH -n 1
-#SBATCH -t 10:00:00
+#SBATCH -n 20
+#SBATCH -t 30:00:00
 #SBATCH --mem=30G
-#SBATCH --job-name=parse_vcf
+#SBATCH --job-name=parse_vcf7
 #SBATCH -e %x
 #SBATCH -o %x
 
@@ -43,15 +43,17 @@ module load vcftools/0.1.16
 
 # vcftools --gzvcf allsistrurus.venom.minDP4.noinf.norm.vcf.gz --chr CM078131.1 --recode --recode-INFO-all --stdout | gzip -c > allsistrurus.CM078131.1.minDP4.noinf.norm.vcf.gz
 
-bcftools index -t allsistrurus.JBAIFV010000077.1.minDP4.noinf.norm.vcf.gz
-bcftools index -t allsistrurus.unplaced.minDP4.noinf.norm.vcf.gz
+vcftools --gzvcf allsistrurus.unplaced.minDP4.noinf.norm.vcf.gz --chr CM078157.1 --recode --recode-INFO-all --stdout | gzip -c > allsistrurus.CM078157.1.minDP4.noinf.norm.vcf.gz
 
-bcftools concat -a \
-  allsistrurus.unplaced.minDP4.noinf.norm.vcf.gz \
-  allsistrurus.JBAIFV010000077.1.minDP4.noinf.norm.vcf.gz \
-  -O z -o allsistrurus.unplaced.merged.vcf.gz
+# bcftools index -t allsistrurus.JBAIFV010000077.1.minDP4.noinf.norm.vcf.gz
+# bcftools index -t allsistrurus.unplaced.minDP4.noinf.norm.vcf.gz
 
-bcftools sort allsistrurus.unplaced.merged.vcf.gz \
-  -O z -o allsistrurus.unplaced.sorted.vcf.gz
+# bcftools concat -a \
+#   allsistrurus.unplaced.minDP4.noinf.norm.vcf.gz \
+#   allsistrurus.JBAIFV010000077.1.minDP4.noinf.norm.vcf.gz \
+#   -O z -o allsistrurus.unplaced.merged.vcf.gz
 
-mv allsistrurus.unplaced.sorted.vcf.gz allsistrurus.unplaced.minDP4.noinf.norm.vcf.gz
+# bcftools sort allsistrurus.unplaced.merged.vcf.gz \
+#   -O z -o allsistrurus.unplaced.sorted.vcf.gz
+
+# mv allsistrurus.unplaced.sorted.vcf.gz allsistrurus.unplaced.minDP4.noinf.norm.vcf.gz
