@@ -44,36 +44,39 @@ module load vcftools/0.1.16
 
 mkdir $MAINDIR/hybrid_index_output/${contig}
 
-$CODEDIR/scripts/hybrid_index/hybrid_index_sliding_window.sh \
-    --vcf $MAINDIR/vcf/${vcf} \
-    --input $CODEDIR/metadata/iowa_samples.txt \
-    --parent1 $CODEDIR/metadata/scat_samples.txt \
-    --parent2 $CODEDIR/metadata/ster_samples.txt \
-    --window 50000 \
-    --step 10000 \
-    --min-aims 10 \
-    --fst-threshold 0.5 \
-    --max-missing 0.2 \
-    --outdir $MAINDIR/hybrid_index_output/${contig}
+# $CODEDIR/scripts/hybrid_index/hybrid_index_sliding_window.sh \
+#     --vcf $MAINDIR/vcf/${vcf} \
+#     --input $CODEDIR/metadata/iowa_samples.txt \
+#     --parent1 $CODEDIR/metadata/scat_samples.txt \
+#     --parent2 $CODEDIR/metadata/ster_samples.txt \
+#     --window 50000 \
+#     --step 10000 \
+#     --min-aims 10 \
+#     --fst-threshold 0.5 \
+#     --max-missing 0.2 \
+#     --outdir $MAINDIR/hybrid_index_output/${contig}
 
-# python $CODEDIR/scripts/hybrid_index/summarize_admixed_regions.py \
-#     --input $MAINDIR/hybrid_index_output/${vcf}/hybrid_index_windows.txt \
-#     --output $MAINDIR/hybrid_index_output/${vcf}/admixed_regions.txt \
-#     --parent1-threshold 0.1 \
-#     --parent2-threshold 0.9 \
-#     --merge-distance 100000
+python $CODEDIR/scripts/hybrid_index/summarize_admixed_regions.py \
+    --input $MAINDIR/hybrid_index_output/${contig}/hybrid_index_windows.tsv \
+    --output $MAINDIR/hybrid_index_output/${contig}/admixed_regions.tsv \
+    --parent1-threshold 0.1 \
+    --mode ci \
+    --target admixed_or_parent2 \
+    --merge-distance 100000 \
+    --cohort-output admixed_regions_cohort.tsv \
+    --cohort-min-samples 3
     
-# # # Basic usage - top 10 peaks with highest hybrid index
-# python $CODEDIR/scripts/hybrid_index/plot_hybrid_index.py \
-#     --input $MAINDIR/hybrid_index_output/${vcf}/hybrid_index_windows.txt \
-#     --output-summary $MAINDIR/hybrid_index_output/${vcf}/hybrid_index_summary.pdf \
-#     --output-individual $MAINDIR/hybrid_index_output/${vcf}/hybrid_index_individuals.pdf \
-#     --output-yaml $MAINDIR/hybrid_index_output/${vcf}/hybrid_peaks.yaml \
-#     --gff $MAINDIR/ref/Scate_genbankLiftOff.gff \
-#     --top-peaks 10 \
-#     --flank 10000 \
-#     --parent1-threshold 0.1 \
-#     --parent2-threshold 0.9
+### Basic usage - top 10 peaks with highest hybrid index
+python $CODEDIR/scripts/hybrid_index/plot_hybrid_index.py \
+    --input $MAINDIR/hybrid_index_output/${contig}/hybrid_index_windows.tsv \
+    --output-summary $MAINDIR/hybrid_index_output/${contig}/hybrid_index_summary.pdf \
+    --output-individual $MAINDIR/hybrid_index_output/${contig}/hybrid_index_individuals.pdf \
+    --output-yaml $MAINDIR/hybrid_index_output/${contig}/hybrid_peaks.yaml \
+    --gff $MAINDIR/ref/Scate_genbankLiftOff.gff \
+    --top-peaks 10 \
+    --flank 10000 \
+    --parent1-threshold 0.1 \
+    --parent2-threshold 0.9
 
 EOF
 done
