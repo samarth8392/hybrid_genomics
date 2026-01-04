@@ -180,7 +180,6 @@ sca1050
 sca0160
 sca0757
 sca0758
-sample
 sca0856
 sca0860
 sca0861
@@ -203,10 +202,6 @@ sca1057
 sca1060
 sca1063
 sca1078
-smi0036
-smi0037
-smi0086
-smi0113
 sca0732
 sca0744
 sca0884
