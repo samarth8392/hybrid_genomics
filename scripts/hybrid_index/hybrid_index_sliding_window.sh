@@ -79,7 +79,7 @@ done
 
 # Check for Python script
 SCRIPT_DIR=$(dirname "$0")
-if [[ ! -f "$SCRIPT_DIR/calculate_hybrid_index.py" ]]; then
+if [[ ! -f "$SCRIPT_DIR/calculate_hybrid_index_ml.py" ]]; then
     echo "Error: calculate_hybrid_index.py not found in $SCRIPT_DIR"
     exit 1
 fi
@@ -98,26 +98,26 @@ echo "Parent2 samples: $(wc -l < $PARENT2)"
 cat $INPUT $PARENT1 $PARENT2 > "$OUTDIR/all_samples.txt"
 
 # Step 1: Filter VCF
-# echo "[$(date)] Filtering VCF..."
-# MAX_MISSING_FRAC=$(echo "1 - $MISSING_THRESHOLD" | bc -l)
+echo "[$(date)] Filtering VCF..."
+MAX_MISSING_FRAC=$(echo "1 - $MISSING_THRESHOLD" | bc -l)
 
-# vcftools --gzvcf $VCF \
-#     --keep "$OUTDIR/all_samples.txt" \
-#     --maf $MIN_MAF \
-#     --max-missing $MAX_MISSING_FRAC \
-#     --remove-indels \
-#     --recode \
-#     --recode-INFO-all \
-#     --out "$OUTDIR/filtered"
+vcftools --gzvcf $VCF \
+    --keep "$OUTDIR/all_samples.txt" \
+    --maf $MIN_MAF \
+    --max-missing $MAX_MISSING_FRAC \
+    --remove-indels \
+    --recode \
+    --recode-INFO-all \
+    --out "$OUTDIR/filtered"
 
-# # Compress filtered VCF
-# if command -v bgzip &> /dev/null; then
-#     bgzip -f "$OUTDIR/filtered.recode.vcf"
-#     mv "$OUTDIR/filtered.recode.vcf.gz" "$OUTDIR/filtered.vcf.gz"
-# else
-#     gzip -f "$OUTDIR/filtered.recode.vcf"
-#     mv "$OUTDIR/filtered.recode.vcf.gz" "$OUTDIR/filtered.vcf.gz"
-# fi
+# Compress filtered VCF
+if command -v bgzip &> /dev/null; then
+    bgzip -f "$OUTDIR/filtered.recode.vcf"
+    mv "$OUTDIR/filtered.recode.vcf.gz" "$OUTDIR/filtered.vcf.gz"
+else
+    gzip -f "$OUTDIR/filtered.recode.vcf"
+    mv "$OUTDIR/filtered.recode.vcf.gz" "$OUTDIR/filtered.vcf.gz"
+fi
 
 # Step 2: Calculate FST between parents
 echo "[$(date)] Calculating FST between parental populations..."
@@ -236,13 +236,16 @@ fi
 
 # Step 7: Calculate hybrid index in sliding windows
 echo "[$(date)] Calculating hybrid index in sliding windows..."
-python3 "$SCRIPT_DIR/calculate_hybrid_index.py" \
+python3 "$SCRIPT_DIR/calculate_hybrid_index_ml.py" \
     --vcf "$OUTDIR/input_aims.vcf.gz" \
-    --diagnostic "$OUTDIR/diagnostic_alleles.txt" \
+    --parent1-freqs "$OUTDIR/parent1_freqs.txt" \
+    --parent2-freqs "$OUTDIR/parent2_freqs.txt" \
     --window $WINDOW_SIZE \
     --step $STEP_SIZE \
     --min-aims $MIN_AIMS \
+    --fixed \
     --output "$OUTDIR/hybrid_index_windows.txt"
+
 
 echo "[$(date)] Analysis complete"
 echo "Results: $OUTDIR/hybrid_index_windows.txt"
