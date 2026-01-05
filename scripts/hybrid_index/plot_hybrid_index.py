@@ -211,6 +211,7 @@ def plot_summary(
     genes_by_chrom: Optional[Dict[str, List[Gene]]],
     flank: int,
     dpi: int,
+    annotate: bool,
 ):
     fig, ax = plt.subplots(figsize=(16, 6))
 
@@ -233,46 +234,57 @@ def plot_summary(
     ax.axhline(parent1_threshold, ls="--", lw=1.5, color="black", alpha=0.6)
     ax.axhline(parent2_threshold, ls="--", lw=1.5, color="black", alpha=0.6)
 
-    y_levels = [0.93, 0.86, 0.79, 0.72]
-    for i, row in enumerate(peaks.itertuples(index=False), start=1):
-        px = float(row.position_bp) / x_scale
-        ax.axvline(px, color="red", ls=":", lw=2, alpha=0.65)
+    if annotate:
+        y_levels = [0.93, 0.86, 0.79, 0.72]
+        for i, row in enumerate(peaks.itertuples(index=False), start=1):
+            px = float(row.position_bp) / x_scale
+            ax.axvline(px, color="red", ls=":", lw=2, alpha=0.65)
 
-        label_lines = [f"Peak {i}"]
-        if genes_by_chrom is not None:
-            ctx = gene_context(genes_by_chrom, chrom, int(row.window_start), int(row.window_end), flank=flank)
-            shown = 0
-            for g, dist_bp in ctx[:2]:
-                prod = _clean_product(g.note)
-                if prod:
-                    label_lines.append(f"{g.gene_id}: {prod}" + (f" ({dist_bp} bp)" if dist_bp else ""))
-                else:
-                    label_lines.append(f"{g.gene_id}" + (f" ({dist_bp} bp)" if dist_bp else ""))
-                shown += 1
-            extra = max(0, len(ctx) - shown)
-            if extra:
-                label_lines.append(f"(+{extra} more)")
+            label_lines = [f"Peak {i}"]
+            if genes_by_chrom is not None:
+                ctx = gene_context(genes_by_chrom, chrom, int(row.window_start), int(row.window_end), flank=flank)
+                shown = 0
+                for g, dist_bp in ctx[:2]:
+                    prod = _clean_product(g.note)
+                    if prod:
+                        label_lines.append(f"{g.gene_id}: {prod}" + (f" ({dist_bp} bp)" if dist_bp else ""))
+                    else:
+                        label_lines.append(f"{g.gene_id}" + (f" ({dist_bp} bp)" if dist_bp else ""))
+                    shown += 1
+                extra = max(0, len(ctx) - shown)
+                if extra:
+                    label_lines.append(f"(+{extra} more)")
 
-        ax.annotate(
-            "\n".join(label_lines),
-            xy=(px, float(row.mean_hi)),
-            xytext=(px, y_levels[(i - 1) % len(y_levels)]),
-            textcoords="data",
-            ha="center",
-            va="center",
-            arrowprops=dict(arrowstyle="->", lw=1.5, color="red"),
-            bbox=dict(boxstyle="round,pad=0.35", fc="yellow", ec="orange", alpha=0.95, lw=1.5),
-            fontsize=8,
-        )
+            ax.annotate(
+                "\n".join(label_lines),
+                xy=(px, float(row.mean_hi)),
+                xytext=(px, y_levels[(i - 1) % len(y_levels)]),
+                textcoords="data",
+                ha="center",
+                va="center",
+                arrowprops=dict(arrowstyle="->", lw=1.5, color="red"),
+                bbox=dict(boxstyle="round,pad=0.35", fc="yellow", ec="orange", alpha=0.95, lw=1.5),
+                fontsize=8,
+            )
+    else:
+        for row in peaks.itertuples(index=False):
+            px = float(row.position_bp) / x_scale
+            ax.axvline(px, color="red", ls=":", lw=2, alpha=0.65)
 
     ax.set_ylim(-0.05, 1.05)
     ax.set_xlabel("Chromosome")
     ax.set_ylabel("Hybrid Index")
 
-    ax.set_title(
-        title if title else f"Mean Hybrid Index Across {n_samples} Samples (Top {len(peaks)} Peaks Annotated)",
-        fontsize=14, fontweight="bold"
-    )
+    if annotate:
+        ax.set_title(
+            title if title else f"Mean Hybrid Index Across {n_samples} Samples (Top {len(peaks)} Peaks Annotated)",
+            fontsize=14, fontweight="bold"
+        )
+    else:
+        ax.set_title(
+            title if title else f"Mean Hybrid Index Across {n_samples} Samples",
+            fontsize=14, fontweight="bold"
+        )
 
     if chrom_label:
         ax.text(0.5, -0.10, chrom_label, transform=ax.transAxes, ha="center", va="top", fontsize=11)
@@ -419,6 +431,7 @@ def parse_args():
     p.add_argument("--output-individual", default=None)
 
     p.add_argument("--gff", default=None)
+    p.add_argument("--annotate", action="store_true", help="Annotate peaks with gene context (requires --gff)")
     p.add_argument("--output-yaml", default=None)
     p.add_argument("--output-peaks-tsv", default=None)
 
@@ -439,6 +452,9 @@ def parse_args():
 
 def main():
     args = parse_args()
+
+    if args.annotate and not args.gff:
+        raise ValueError("--annotate requires --gff")
 
     df = pd.read_csv(args.input, sep="\t")
     cols = infer_columns(df)
@@ -483,6 +499,7 @@ def main():
         genes_by_chrom=genes_by_chrom,
         flank=args.flank,
         dpi=args.dpi,
+        annotate=args.annotate,
     )
 
     if args.output_individual:
