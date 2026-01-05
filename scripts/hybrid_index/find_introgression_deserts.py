@@ -18,17 +18,14 @@ Default target = parent1 (S. catenatus), using CI-based classification:
   else admixed
 """
 
-from __future__ import annotations
-
 import argparse
 import sys
 from dataclasses import dataclass
-from typing import Dict, List, Optional, Tuple
 
 import pandas as pd
 
 
-def _pick_col(df: pd.DataFrame, candidates: List[str]) -> Optional[str]:
+def _pick_col(df: pd.DataFrame, candidates: list[str]) -> str | None:
     cols = {c.lower(): c for c in df.columns}
     for cand in candidates:
         if cand.lower() in cols:
@@ -142,7 +139,7 @@ def merge_windows_into_regions(
     merge_distance: int,
     min_length: int,
     min_windows: int,
-) -> Tuple[pd.DataFrame, pd.DataFrame]:
+) -> tuple[pd.DataFrame, pd.DataFrame]:
     """
     Returns:
       (filtered_windows_used_for_merging, regions_df)
@@ -151,12 +148,12 @@ def merge_windows_into_regions(
     w = w[(w["n_samples"] >= min_samples) & (w[support_col] >= min_support)].copy()
     w = w.sort_values(["chrom", "window_start", "window_end"], kind="mergesort")
 
-    regions: List[Region] = []
+    regions: list[Region] = []
 
     for chrom, g in w.groupby("chrom", sort=False):
-        cur_start: Optional[int] = None
-        cur_end: Optional[int] = None
-        rows: List[pd.Series] = []
+        cur_start: int | None = None
+        cur_end: int | None = None
+        rows: list[pd.Series] = []
 
         for _, row in g.iterrows():
             s = int(row["window_start"])
@@ -263,7 +260,7 @@ def main() -> None:
     # Load inputs
     dfs = []
     for fp in args.input:
-        d = pd.read_csv(fp, sep="\t")
+        d = pd.read_csv(fp, sep="\t", low_memory=False)
         dfs.append(d)
     df = pd.concat(dfs, ignore_index=True)
 

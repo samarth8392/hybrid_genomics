@@ -23,7 +23,8 @@ MAINDIR="/fs/ess/scratch/PAS1533/smathur/hybrid_project"
 OUTDIR="$MAINDIR/hybrid_index_output"
 CODEDIR="$MAINDIR/code"
 
-cat $CODEDIR/metadata/vcf_files.txt | while IFS=$'\t' read -r vcf
+# cat $CODEDIR/metadata/vcf_files.txt | while IFS=$'\t' read -r vcf
+for vcf in allsistrurus.CM078116.1.minDP4.noinf.norm.vcf.gz allsistrurus.CM078122.1.minDP4.noinf.norm.vcf.gz allsistrurus.CM078123.1.minDP4.noinf.norm.vcf.gz allsistrurus.CM078131.1.minDP4.noinf.norm.vcf.gz allsistrurus.CM078157.1.minDP4.noinf.norm.vcf.gz allsistrurus.JBAIFV010000021.1.minDP4.noinf.norm.vcf.gz allsistrurus.unplaced.sorted.vcf.gz
 do
     basename=$(basename "$vcf" .vcf.gz)
     contig=${basename#*.}
@@ -34,7 +35,7 @@ do
 #SBATCH -A PAS1533
 #SBATCH -N 1
 #SBATCH -n 20
-#SBATCH -t 24:00:00
+#SBATCH -t 10:00:00
 #SBATCH --job-name=hybrid_index_${contig}
 #SBATCH -e %x
 #SBATCH -o %x
@@ -44,17 +45,17 @@ module load vcftools/0.1.16
 
 mkdir $MAINDIR/hybrid_index_output/${contig}
 
-# $CODEDIR/scripts/hybrid_index/hybrid_index_sliding_window.sh \
-#     --vcf $MAINDIR/vcf/${vcf} \
-#     --input $CODEDIR/metadata/iowa_samples.txt \
-#     --parent1 $CODEDIR/metadata/scat_samples.txt \
-#     --parent2 $CODEDIR/metadata/ster_samples.txt \
-#     --window 50000 \
-#     --step 10000 \
-#     --min-aims 10 \
-#     --fst-threshold 0.5 \
-#     --max-missing 0.2 \
-#     --outdir $MAINDIR/hybrid_index_output/${contig}
+$CODEDIR/scripts/hybrid_index/hybrid_index_sliding_window.sh \
+    --vcf $MAINDIR/vcf/${vcf} \
+    --input $CODEDIR/metadata/iowa_samples.txt \
+    --parent1 $CODEDIR/metadata/scat_samples.txt \
+    --parent2 $CODEDIR/metadata/ster_samples.txt \
+    --window 50000 \
+    --step 10000 \
+    --min-aims 10 \
+    --fst-threshold 0.5 \
+    --max-missing 0.2 \
+    --outdir $MAINDIR/hybrid_index_output/${contig}
 
 python $CODEDIR/scripts/hybrid_index/summarize_admixed_regions.py \
     --input $MAINDIR/hybrid_index_output/${contig}/hybrid_index_windows.tsv \
@@ -65,18 +66,26 @@ python $CODEDIR/scripts/hybrid_index/summarize_admixed_regions.py \
     --merge-distance 100000 \
     --cohort-output admixed_regions_cohort.tsv \
     --cohort-min-samples 3
-    
-### Basic usage - top 10 peaks with highest hybrid index
+
 python $CODEDIR/scripts/hybrid_index/plot_hybrid_index.py \
     --input $MAINDIR/hybrid_index_output/${contig}/hybrid_index_windows.tsv \
     --output-summary $MAINDIR/hybrid_index_output/${contig}/hybrid_index_summary.pdf \
     --output-individual $MAINDIR/hybrid_index_output/${contig}/hybrid_index_individuals.pdf \
     --output-yaml $MAINDIR/hybrid_index_output/${contig}/hybrid_peaks.yaml \
-    --gff $MAINDIR/ref/Scate_genbankLiftOff.gff \
-    --top-peaks 10 \
-    --flank 10000 \
     --parent1-threshold 0.1 \
     --parent2-threshold 0.9
+    
+### Basic usage - top 10 peaks with highest hybrid index
+# python $CODEDIR/scripts/hybrid_index/plot_hybrid_index.py \
+#     --input $MAINDIR/hybrid_index_output/${contig}/hybrid_index_windows.tsv \
+#     --output-summary $MAINDIR/hybrid_index_output/${contig}/hybrid_index_summary.pdf \
+#     --output-individual $MAINDIR/hybrid_index_output/${contig}/hybrid_index_individuals.pdf \
+#     --output-yaml $MAINDIR/hybrid_index_output/${contig}/hybrid_peaks.yaml \
+#     --gff $MAINDIR/ref/Scate_genbankLiftOff.gff \
+#     --top-peaks 10 \
+#     --flank 10000 \
+#     --parent1-threshold 0.1 \
+#     --parent2-threshold 0.9
 
 EOF
 done
@@ -106,10 +115,11 @@ done
 
 #######################
 
-python3 find_introgression_deserts.py \
+python $CODEDIR/scripts/hybrid_index/find_introgression_deserts.py \
   --input all_chroms.hybrid_index_windows.tsv \
-  --output parent1_deserts.tsv \
+  --output allchrom_scatenatus_introgrssion_deserts.tsv \
   --target parent1 \
+  --merge-distance 5000 \
   --min-samples 7 \
   --min-support 0.8 \
   --min-length 200000
