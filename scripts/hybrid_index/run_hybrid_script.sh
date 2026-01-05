@@ -122,4 +122,11 @@ python $CODEDIR/scripts/hybrid_index/find_introgression_deserts.py \
   --merge-distance 5000 \
   --min-samples 7 \
   --min-support 0.8 \
-  --min-length 200000
+  --min-length 200000 \
+  --gff $MAINDIR/ref/Scate_genbankLiftOff.gff 
+
+python $CODEDIR/scripts/hybrid_index/annotate_desert_genes.py \
+--input allchrom_scatenatus_introgrssion_deserts.tsv \
+--gff $MAINDIR/ref/Scate_genbankLiftOff.gff \
+--output allchrom_scatenatus_introgrssion_deserts_annotated.tsv \
+--yaml
