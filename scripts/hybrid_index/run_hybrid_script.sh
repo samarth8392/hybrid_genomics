@@ -97,9 +97,9 @@ do
     contig=${basename#*.}
     contig=${contig%%.*}
     
-    cp $MAINDIR/hybrid_index_output/${vcf}/hybrid_index_individuals.pdf $MAINDIR/results/hybrid_index/$contig.hybrid_index_individuals.pdf
-    cp $MAINDIR/hybrid_index_output/${vcf}/hybrid_index_summary.pdf $MAINDIR/results/hybrid_index/$contig.hybrid_index_summary.pdf
-    cp $MAINDIR/hybrid_index_output/${vcf}/hybrid_peaks.yaml $MAINDIR/results/hybrid_index/$contig.hybrid_peaks.yaml
-    cp $MAINDIR/hybrid_index_output/${vcf}/admixed_regions.txt $MAINDIR/results/hybrid_index/$contig.admixed_regions.txt
-    cp $MAINDIR/hybrid_index_output/${vcf}/hybrid_index_windows.txt $MAINDIR/results/hybrid_index/$contig.hybrid_index_windows.txt
+    cp $MAINDIR/hybrid_index_output/${contig}/hybrid_index_individuals.pdf $MAINDIR/results/hybrid_index/$contig.hybrid_index_individuals.pdf
+    cp $MAINDIR/hybrid_index_output/${contig}/hybrid_index_summary.pdf $MAINDIR/results/hybrid_index/$contig.hybrid_index_summary.pdf
+    cp $MAINDIR/hybrid_index_output/${contig}/hybrid_peaks.yaml $MAINDIR/results/hybrid_index/$contig.hybrid_peaks.yaml
+    cp $MAINDIR/hybrid_index_output/${contig}/admixed_regions.tsv $MAINDIR/results/hybrid_index/$contig.admixed_regions.tsv
+    cp $MAINDIR/hybrid_index_output/${contig}/hybrid_index_windows.tsv $MAINDIR/results/hybrid_index/$contig.hybrid_index_windows.tsv
 done

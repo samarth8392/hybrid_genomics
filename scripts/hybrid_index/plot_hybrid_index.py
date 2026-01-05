@@ -45,9 +45,9 @@ except Exception:
     yaml = None
 
 
-PARENT1_COLOR = "#1E90FF"  # blue
+PARENT1_COLOR = "#117BE6"  # blue
 ADMIXED_COLOR = "#FFF3E0"  # light orange
-PARENT2_COLOR = "#FFB6C1"  # pink
+PARENT2_COLOR = "#B13447"  # pink
 
 
 def _first_present(cols: List[str], df_cols: pd.Index) -> Optional[str]:
