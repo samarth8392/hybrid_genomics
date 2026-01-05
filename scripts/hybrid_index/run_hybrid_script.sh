@@ -23,8 +23,7 @@ MAINDIR="/fs/ess/scratch/PAS1533/smathur/hybrid_project"
 OUTDIR="$MAINDIR/hybrid_index_output"
 CODEDIR="$MAINDIR/code"
 
-# cat $CODEDIR/metadata/vcf_files.txt | while IFS=$'\t' read -r vcf
-for vcf in allsistrurus.CM078116.1.minDP4.noinf.norm.vcf.gz allsistrurus.CM078122.1.minDP4.noinf.norm.vcf.gz allsistrurus.CM078123.1.minDP4.noinf.norm.vcf.gz allsistrurus.CM078131.1.minDP4.noinf.norm.vcf.gz allsistrurus.CM078157.1.minDP4.noinf.norm.vcf.gz allsistrurus.JBAIFV010000021.1.minDP4.noinf.norm.vcf.gz allsistrurus.unplaced.sorted.vcf.gz
+cat $CODEDIR/metadata/vcf_files.txt | while IFS=$'\t' read -r vcf
 do
     basename=$(basename "$vcf" .vcf.gz)
     contig=${basename#*.}
@@ -115,14 +114,18 @@ done
 
 #######################
 
+cd $MAINDIR/results/hybrid_index
+
+cat *hybrid_index_windows.tsv > all_chroms.hybrid_index_windows.tsv
+
 python $CODEDIR/scripts/hybrid_index/find_introgression_deserts.py \
   --input all_chroms.hybrid_index_windows.tsv \
   --output allchrom_scatenatus_introgrssion_deserts.tsv \
   --target parent1 \
-  --merge-distance 5000 \
+  --merge-distance 10000 \
   --min-samples 7 \
   --min-support 0.8 \
-  --min-length 200000 \
+  --min-length 500000 \
   --gff $MAINDIR/ref/Scate_genbankLiftOff.gff 
 
 python $CODEDIR/scripts/hybrid_index/annotate_desert_genes.py \
