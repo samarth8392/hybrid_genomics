@@ -8,14 +8,21 @@ with its annotation from GFF.
 
 Input: TSV from find_introgression_deserts.py with 'genes' column
 Output: TSV with one gene per row and its annotation
+        Optional YAML with nested region/gene structure
 """
 
 import argparse
 import sys
-from typing import Dict
+from typing import Dict, List, Any
 from urllib.parse import unquote
+from pathlib import Path
 
 import pandas as pd
+
+try:
+    import yaml
+except ImportError:
+    yaml = None
 
 
 def parse_gff_annotations(gff_path: str) -> Dict[str, str]:
@@ -46,6 +53,41 @@ def parse_gff_annotations(gff_path: str) -> Dict[str, str]:
             annotations[gene_id] = note
     
     return annotations
+
+
+def create_nested_structure(
+    deserts_df: pd.DataFrame,
+    annotations: Dict[str, str],
+) -> List[Dict[str, Any]]:
+    """Create nested structure for YAML output."""
+    
+    regions = []
+    
+    for _, region in deserts_df.iterrows():
+        genes_str = str(region.get("genes", ""))
+        
+        gene_list = []
+        if genes_str and genes_str != "":
+            gene_ids = [g.strip() for g in genes_str.split(",") if g.strip()]
+            for gene_id in gene_ids:
+                gene_list.append({
+                    "gene_id": gene_id,
+                    "annotation": annotations.get(gene_id, ""),
+                })
+        
+        regions.append({
+            "chrom": str(region["chrom"]),
+            "region_start": int(region["region_start"]),
+            "region_end": int(region["region_end"]),
+            "length": int(region["length"]),
+            "n_windows": int(region["n_windows"]),
+            "mean_support": float(region.get("mean_support", 0)),
+            "mean_hybrid_index": float(region.get("mean_hybrid_index", 0)),
+            "n_genes": len(gene_list),
+            "genes": gene_list,
+        })
+    
+    return regions
 
 
 def expand_desert_genes(
@@ -85,11 +127,16 @@ def parse_args() -> argparse.Namespace:
     p.add_argument("--input", required=True, help="TSV from find_introgression_deserts.py")
     p.add_argument("--gff", required=True, help="GFF file with gene annotations")
     p.add_argument("--output", required=True, help="Output TSV with per-gene annotations")
+    p.add_argument("--yaml", action="store_true", help="Also create YAML output with nested structure")
     return p.parse_args()
 
 
 def main() -> None:
     args = parse_args()
+    
+    if args.yaml and yaml is None:
+        print("ERROR: --yaml requested but PyYAML not installed", file=sys.stderr)
+        sys.exit(1)
     
     # Load desert regions
     deserts = pd.read_csv(args.input, sep="\t")
@@ -101,13 +148,21 @@ def main() -> None:
     # Parse GFF annotations
     annotations = parse_gff_annotations(args.gff)
     
-    # Expand genes
+    # Expand genes to TSV
     genes_df = expand_desert_genes(deserts, annotations)
-    
-    # Write output
     genes_df.to_csv(args.output, sep="\t", index=False)
     
     print(f"[OK] {len(genes_df)} genes annotated from {len(deserts)} regions -> {args.output}", file=sys.stderr)
+    
+    # Create YAML if requested
+    if args.yaml:
+        yaml_path = Path(args.output).with_suffix(".yaml")
+        nested_data = create_nested_structure(deserts, annotations)
+        
+        with open(yaml_path, "w") as f:
+            yaml.safe_dump({"regions": nested_data}, f, sort_keys=False, default_flow_style=False)
+        
+        print(f"[OK] YAML output written -> {yaml_path}", file=sys.stderr)
 
 
 if __name__ == "__main__":
