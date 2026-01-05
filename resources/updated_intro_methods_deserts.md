@@ -155,3 +155,69 @@ Walsh, J., Shriver, W. G., Olsen, B. J., & Kovach, A. I. (2016). Differential in
 Yang, W., Feiner, N., & Uller, T. (2020). Spatial variation in gene flow across a hybrid zone reveals causes of reproductive isolation and asymmetric introgression in wall lizards. *Evolution*, 74, 1289–1300.
 
 Zancolli, G., Baker, T. G., Barlow, A., Bradley, R. K., Calvete, J. J., Carter, K. C., et al. (2016). Is Hybridization a Source of Adaptive Venom Variation in Rattlesnakes? A Test, Using a *Crotalus scutulatus* × *viridis* Hybrid Zone in Southwestern New Mexico. *Toxins*, 8, 188.
+
+| Scatenatus gene_id | Ortholog / best match (mammal)             | Protein function (summary)                                                                                                | Source       |
+| ------------------ | ------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------- | ------------ |
+| Scate06229         | OPRK1                                      | Kappa opioid receptor (GPCR); mediates opioid peptide signaling in excitable tissues                                      |              |
+| Scate06230         | RB1CC1 (FIP200)                            | Scaffold regulating cell growth/proliferation, apoptosis, autophagy, and migration                                        | ([NCBI][1])  |
+| Scate06149         | HNF4G                                      | Nuclear receptor transcription factor; activates RNA Pol II transcription programs                                        | ([NCBI][2])  |
+| Scate10612         | CLSTN2 (mouse evidence)                    | Predicted Ca2+-binding / synapse-related roles (calsyntenin family; neuronal processes)                                   |              |
+| Scate10613         | (unresolved; “L345_15459”)                 | insufficient data (uncharacterized in provided annotation)                                                                | —            |
+| Scate11662         | ATF7IP                                     | Heterochromatin-associated nuclear regulator; can coactivate or corepress transcription depending on partners             |              |
+| Scate11663         | PLB1                                       | Membrane phospholipase with lysophospholipase/phospholipase A2 activity; broader lipid hydrolase activity                 |              |
+| Scate11596         | NUDT4 (DIPP2)                              | Hydrolase controlling turnover of diphosphoinositol polyphosphates (high-energy signaling metabolites)                    | ([NCBI][3])  |
+| Scate11597         | UBE2N                                      | E2 ubiquitin-conjugating enzyme; implicated in DNA postreplication repair (mouse evidence cited in record)                |              |
+| Scate11598         | MRPL42                                     | Nuclear-encoded mitochondrial ribosomal protein; supports mitochondrial translation                                       |              |
+| Scate11599         | SOCS2                                      | Cytokine-inducible negative regulator of JAK/STAT signaling; interacts with signaling complexes                           | ([NCBI][4])  |
+| Scate11562         | SYT1                                       | Synaptic vesicle Ca2+ sensor triggering neurotransmitter release during exocytosis                                        | ([NCBI][5])  |
+| Scate11546         | KCNC2                                      | Voltage-gated K+ channel (delayed rectifier); enables rapid repolarization in excitable membranes                         | ([NCBI][6])  |
+| Scate11547         | CAPS2 (calcyphosine 2)                     | Ca2+-binding protein with EF-hand motifs                                                                                  | ([NCBI][7])  |
+| Scate11548         | CAPS2 (calcyphosine 2)                     | Ca2+-binding protein with EF-hand motifs                                                                                  | ([NCBI][7])  |
+| Scate11549         | LOC101067630 (uncharacterized)             | insufficient data (uncharacterized in provided annotation)                                                                | —            |
+| Scate11550         | GLIPR1                                     | CAP/PR-1 superfamily protein; implicated in immune defense/cancer biology; reported pro-apoptotic in some contexts        | ([NCBI][8])  |
+| Scate11551         | (unresolved; “uncharacterized protein”)    | insufficient data (uncharacterized in provided annotation)                                                                | —            |
+| Scate11552         | KRR1 (mouse/rat evidence)                  | SSU processome / ribosome biogenesis factor; rRNA processing / small-subunit biogenesis                                   |              |
+| Scate11553         | PHLDA1                                     | Conserved nuclear protein; may contribute to anti-apoptotic effects of IGF-1                                              |              |
+| Scate11554         | NAP1L1                                     | Histone chaperone (NAP family); involved in DNA replication/chromatin formation and proliferation regulation              | ([NCBI][9])  |
+| Scate11555         | OSBPL8 (ORP8)                              | Lipid-binding/transfer protein; exchanges PS/PI4P/oxysterols between ER and plasma membrane                               | ([NCBI][10]) |
+| Scate11556         | ZDHHC17 (HIP14)                            | Palmitoyltransferase (S-acylation); impacts protein palmitoylation and related signaling/cell-death programs              | ([NCBI][11]) |
+| Scate11557         | ZDHHC17 (HIP14)                            | Palmitoyltransferase (S-acylation); impacts protein palmitoylation and related signaling/cell-death programs              | ([NCBI][11]) |
+| Scate11558         | CSRP2 (mouse evidence)                     | LIM-domain protein; predicted actinin binding / muscle structural roles; muscle development/sarcomere organization        |              |
+| Scate11559         | E2F7                                       | Transcriptional repressor in DNA damage/p53 signaling and transcription regulation; roles reported in angiogenesis        | ([NCBI][12]) |
+| Scate11560         | NAV3 (mouse evidence)                      | Predicted microtubule-binding; roles in migration and microtubule dynamics regulation                                     |              |
+| Scate11561         | NAV3 (mouse evidence)                      | Predicted microtubule-binding; roles in migration and microtubule dynamics regulation                                     |              |
+| Scate11459         | ING-family (paralog ambiguous)             | ING proteins: chromatin-regulatory (PHD-finger) tumor-suppressor family; DNA repair/apoptosis regulation                  |              |
+| Scate11460         | TSPAN12                                    | Tetraspanin family membrane protein; mediates signaling events affecting development/growth/motility                      | ([NCBI][13]) |
+| Scate11461         | KCND2                                      | Voltage-gated K+ channel subunit; regulates excitability via voltage-dependent K+ permeability                            |              |
+| Scate12346         | PCDH18                                     | Protocadherin (cadherin superfamily); implicated in neuronal cell-cell connectivity (specific function not fully defined) | ([NCBI][14]) |
+| Scate12348         | (unresolved; “L345_05116”)                 | insufficient data (uncharacterized in provided annotation)                                                                | —            |
+| Scate12349         | SCLT1                                      | Adaptor linking clathrin↔sodium channel components; also distal-appendage centriole protein needed for ciliogenesis       |              |
+| Scate12350         | JADE1 (PHF17)                              | Transcriptional coactivator; part of histone acetyltransferase complexes; implicated in Wnt pathway/cell-cycle control    | ([NCBI][15]) |
+| Scate12351         | PGRMC2                                     | Heme-binding membrane component; implicated in adipose development; ER/nuclear-envelope localization                      | ([NCBI][16]) |
+| Scate12352         | LARP1B                                     | La-motif RNA-binding protein family member; likely RNA metabolism/regulation; multiple isoforms                           | ([NCBI][17]) |
+| Scate12353         | (unresolved; “L345_05115” uncharacterized) | insufficient data (uncharacterized in provided annotation)                                                                | —            |
+| Scate12354         | MFSD8 (mouse evidence)                     | Lysosomal membrane protein; implicated in lysosome/TORC1/autophagy-related processes; ortholog linked to CLN7             |              |
+| Scate12355         | PLK4                                       | Ser/Thr kinase at centrioles; master regulator of centriole duplication in cell cycle                                     |              |
+| Scate12356         | HSPA4L                                     | Heat-shock inducible Hsp70-family chaperone; protects against aggregated proteins under stress                            | ([NCBI][18]) |
+| Scate12357         | SLC25A31 (ANT4)                            | Mitochondrial ADP/ATP carrier; implicated in spermatogenesis/flagellar cytoskeleton association                           |              |
+| Scate12358         | INTU (aka PDZD6)                           | Ciliogenesis / planar cell polarity protein; involved in craniofacial/digit morphogenesis; basal-body/cilium localization | ([NCBI][19]) |
+
+[1]: https://www.ncbi.nlm.nih.gov/gene/9821?utm_source=chatgpt.com "RB1CC1 RB1 inducible coiled-coil 1 [Homo sapiens (human)] - Gene - NCBI"
+[2]: https://www.ncbi.nlm.nih.gov/gene/3174 "HNF4G hepatocyte nuclear factor 4 gamma [Homo sapiens (human)] - Gene - NCBI"
+[3]: https://www.ncbi.nlm.nih.gov/gene/11163?utm_source=chatgpt.com "NUDT4 nudix hydrolase 4 [Homo sapiens (human)] - Gene - NCBI"
+[4]: https://www.ncbi.nlm.nih.gov/gene/8835?utm_source=chatgpt.com "SOCS2 suppressor of cytokine signaling 2 [Homo sapiens (human)] - Gene - NCBI"
+[5]: https://www.ncbi.nlm.nih.gov/gene/6857?utm_source=chatgpt.com "SYT1 synaptotagmin 1 [Homo sapiens (human)] - Gene - NCBI"
+[6]: https://www.ncbi.nlm.nih.gov/gene/3747?utm_source=chatgpt.com "KCNC2 potassium voltage-gated channel subfamily C member 2 [Homo sapiens (human)] - Gene - NCBI"
+[7]: https://www.ncbi.nlm.nih.gov/gene/84698?utm_source=chatgpt.com "CAPS2 calcyphosine 2 [Homo sapiens (human)] - Gene - NCBI"
+[8]: https://www.ncbi.nlm.nih.gov/gene/11010?utm_source=chatgpt.com "GLIPR1 GLI pathogenesis related 1 [Homo sapiens (human)] - Gene - NCBI"
+[9]: https://www.ncbi.nlm.nih.gov/gene/4673?utm_source=chatgpt.com "NAP1L1 nucleosome assembly protein 1 like 1 [Homo sapiens (human)] - Gene - NCBI"
+[10]: https://www.ncbi.nlm.nih.gov/gtr/genes/114882/?utm_source=chatgpt.com "OSBPL8 oxysterol binding protein like 8 - NIH Genetic Testing Registry (GTR) - NCBI"
+[11]: https://www.ncbi.nlm.nih.gov/gene/23390?utm_source=chatgpt.com "ZDHHC17 zDHHC palmitoyltransferase 17 [Homo sapiens (human)] - Gene - NCBI"
+[12]: https://www.ncbi.nlm.nih.gov/gene/144455?utm_source=chatgpt.com "E2F7 E2F transcription factor 7 [Homo sapiens (human)] - Gene - NCBI"
+[13]: https://www.ncbi.nlm.nih.gov/gene/23554?utm_source=chatgpt.com "TSPAN12 tetraspanin 12 [Homo sapiens (human)] - Gene - NCBI"
+[14]: https://www.ncbi.nlm.nih.gov/gene/54510?utm_source=chatgpt.com "PCDH18 protocadherin 18 [Homo sapiens (human)] - Gene - NCBI"
+[15]: https://www.ncbi.nlm.nih.gov/gene/79960?utm_source=chatgpt.com "JADE1 jade family PHD finger 1 [Homo sapiens (human)] - Gene - NCBI"
+[16]: https://www.ncbi.nlm.nih.gov/gene/10424?utm_source=chatgpt.com "PGRMC2 progesterone receptor membrane component 2 [Homo sapiens (human)] - Gene - NCBI"
+[17]: https://www.ncbi.nlm.nih.gov/gene/55132?utm_source=chatgpt.com "LARP1B La ribonucleoprotein 1B [Homo sapiens (human)] - Gene - NCBI"
+[18]: https://www.ncbi.nlm.nih.gov/gene/22824?utm_source=chatgpt.com "HSPA4L heat shock protein family A (Hsp70) member 4 like [Homo sapiens (human)] - Gene - NCBI"
+[19]: https://www.ncbi.nlm.nih.gov/gene/27152?utm_source=chatgpt.com "INTU inturned planar cell polarity protein [Homo sapiens (human)] - Gene - NCBI"
