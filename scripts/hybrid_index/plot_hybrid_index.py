@@ -297,7 +297,8 @@ def plot_summary(
         plt.Line2D([0], [0], color="gray", alpha=0.18, lw=8, label="± 1 SD"),
         plt.Line2D([0], [0], color="black", lw=2, label="Mean"),
     ]
-    ax.legend(handles=legend_elements, loc="upper left", fontsize=10, framealpha=0.95, edgecolor="black")
+    ax.legend(handles=legend_elements, loc="upper left", bbox_to_anchor=(1.02, 1), 
+              fontsize=10, framealpha=0.95, edgecolor="black")
 
     fig.tight_layout()
     fig.savefig(outpath, dpi=dpi, bbox_inches="tight")
