@@ -21,6 +21,8 @@ Default target = parent1 (S. catenatus), using CI-based classification:
 import argparse
 import sys
 from dataclasses import dataclass
+from typing import Dict, List
+from urllib.parse import unquote
 
 import pandas as pd
 
@@ -87,6 +89,58 @@ class Region:
     min_support: float
     mean_hybrid_index: float
     n_samples_median: float
+
+
+@dataclass(frozen=True)
+class Gene:
+    start: int
+    end: int
+    strand: str
+    gene_id: str
+    note: str
+
+
+def parse_gff_genes(gff_path: str) -> Dict[str, List[Gene]]:
+    genes: Dict[str, List[Gene]] = {}
+    with open(gff_path) as f:
+        for line in f:
+            if not line or line.startswith("#"):
+                continue
+            parts = line.rstrip("\n").split("\t")
+            if len(parts) < 9:
+                continue
+            chrom, _source, feature, start, end, _score, strand, _phase, attrs = parts
+            if feature != "gene":
+                continue
+
+            start_i = int(start)
+            end_i = int(end)
+
+            d: Dict[str, str] = {}
+            for kv in attrs.split(";"):
+                if "=" in kv:
+                    k, v = kv.split("=", 1)
+                    d[k] = unquote(v)
+
+            gene_id = d.get("Name") or d.get("gene") or d.get("ID") or "unknown"
+            note = d.get("product") or d.get("Note") or ""
+            genes.setdefault(chrom, []).append(Gene(start=start_i, end=end_i, strand=strand, gene_id=gene_id, note=note))
+
+    for chrom in genes:
+        genes[chrom].sort(key=lambda g: (g.start, g.end))
+    return genes
+
+
+def find_genes_in_region(
+    genes_by_chrom: Dict[str, List[Gene]],
+    chrom: str,
+    region_start: int,
+    region_end: int,
+) -> List[Gene]:
+    """Find all genes that overlap with the region."""
+    genes = genes_by_chrom.get(chrom, [])
+    overlapping = [g for g in genes if g.end >= region_start and g.start <= region_end]
+    return overlapping
 
 
 def build_window_summary(
@@ -250,6 +304,8 @@ def parse_args() -> argparse.Namespace:
     p.add_argument("--min-length", type=int, default=200_000, help="Min merged region length (bp).")
     p.add_argument("--min-windows", type=int, default=3, help="Min windows per merged region.")
     p.add_argument("--chrom", default=None, help="Optional: restrict to a single chrom/contig ID.")
+    
+    p.add_argument("--gff", default=None, help="Optional: GFF file to annotate regions with overlapping genes.")
 
     return p.parse_args()
 
@@ -307,6 +363,30 @@ def main() -> None:
         win_filt.to_csv(args.output_windows_filtered, sep="\t", index=False)
 
     regions.insert(0, "target", args.target)
+
+    # Annotate with genes if GFF provided
+    if args.gff is not None and not regions.empty:
+        genes_by_chrom = parse_gff_genes(args.gff)
+        
+        gene_ids = []
+        gene_counts = []
+        
+        for _, row in regions.iterrows():
+            overlapping = find_genes_in_region(
+                genes_by_chrom,
+                row["chrom"],
+                int(row["region_start"]),
+                int(row["region_end"])
+            )
+            
+            gene_counts.append(len(overlapping))
+            if overlapping:
+                gene_ids.append(",".join(g.gene_id for g in overlapping))
+            else:
+                gene_ids.append("")
+        
+        regions["n_genes"] = gene_counts
+        regions["genes"] = gene_ids
 
     regions.to_csv(args.output, sep="\t", index=False)
 
