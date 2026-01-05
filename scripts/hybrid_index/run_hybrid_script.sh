@@ -103,3 +103,13 @@ do
     cp $MAINDIR/hybrid_index_output/${contig}/admixed_regions.tsv $MAINDIR/results/hybrid_index/$contig.admixed_regions.tsv
     cp $MAINDIR/hybrid_index_output/${contig}/hybrid_index_windows.tsv $MAINDIR/results/hybrid_index/$contig.hybrid_index_windows.tsv
 done
+
+#######################
+
+python3 find_introgression_deserts.py \
+  --input all_chroms.hybrid_index_windows.tsv \
+  --output parent1_deserts.tsv \
+  --target parent1 \
+  --min-samples 7 \
+  --min-support 0.8 \
+  --min-length 200000
