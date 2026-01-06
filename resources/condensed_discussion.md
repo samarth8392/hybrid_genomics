@@ -6,6 +6,11 @@ Introgression deserts represent genomic regions where historical gene flow has b
 
 The distribution of deserts across multiple chromosomes rather than concentration at a few large-effect regions suggests reproductive isolation in *Sistrurus* is polygenic, consistent with theoretical predictions that barriers accumulate incrementally during allopatric divergence (Barton & Bengtsson, 1986; Gavrilets, 2004). Similar architectures have been documented in stickleback (Jones et al., 2012), sunflowers (Rieseberg et al., 1999), and *Heliconius* butterflies (Nadeau et al., 2012), where 10–100 genomic regions collectively contribute to reproductive isolation. This pattern contrasts sharply with magic trait models where single loci drive both ecological divergence and assortative mating, suggesting that *Sistrurus* speciation involved gradual accumulation of incompatibilities rather than rapid ecological speciation.
 
+## Heterogeneous Genomic Landscape: Chromosome-Specific Introgression Patterns
+The striking contrast between highly admixed chromosomes (e.g., chr1; CM078115.1) and chromosomes harboring large introgression deserts (e.g., chr6; CM078120.1) reflects the interplay between recombination, selection, and demographic history following secondary contact. Demographic reconstruction indicates the Iowa lineage diverged in allopatry and subsequently experienced introgression from S. tergeminus approximately 11,000–23,000 years ago (Sovic et al., 2016). Under this scenario, initial introgression introduced S. tergeminus ancestry genome-wide as a mosaic of large ancestry blocks. Over subsequent generations (550–1,100 generations assuming 10–20 year generation time), recombination progressively fragmented these blocks, breaking ancestral linkage disequilibrium and creating finer-scale ancestry mosaics. On chromosomes where introgressed alleles were selectively neutral or weakly deleterious, recombination generated the highly admixed landscape observed on chr1, where mean hybrid index fluctuates across the chromosome as different individuals carry different parental segments at each position. This between-individual heterogeneity produces elevated mean admixture even if no single individual is uniformly intermediate across the entire chromosome, a pattern characteristic of advanced-generation hybrid populations where recombination has shuffled ancestry extensively (Buerkle & Rieseberg, 2008).
+
+In contrast, chromosomes harboring large deserts (chr6, chr3, chr7) exhibit sustained S. catenatus ancestry across most individuals, indicating selection has actively purged S. tergeminus ancestry in these regions faster than recombination can reintroduce it. The 12.69 Mb chr6 megadesert containing FOXP2 likely represents either a region with exceptionally strong selection against introgression (many tightly linked barrier loci creating a "barrier cluster") or a low-recombination region (centromeric proximity or structural variant such as an inversion) where selection on one or few loci maintains large linked ancestry blocks. Chromosomes with few or weak barrier loci would permit introgressed ancestry to persist neutrally, generating the mosaic pattern on chr1, whereas chromosomes enriched for incompatibility loci (neural development on chr6, neurotransmitter receptors on chr7, metabolic genes on chr3) show extensive deserts. This chromosome-level heterogeneity in barrier loci density has been documented in house mouse hybrid zones where the X chromosome contains disproportionate barrier loci (Payseur et al., 2004) and in stickleback where chromosomes 1, 4, and 7 show elevated differentiation associated with freshwater adaptation genes (Jones et al., 2012). An alternative hypothesis is that chr1 experienced adaptive introgression, where one or more S. tergeminus alleles were favored in the Iowa environment, increasing retention and spread of S. tergeminus ancestry across multiple chr1 regions. Testing this requires population genetic scans for positive selection (extended haplotype homozygosity, Tajima's D) and phenotypic association studies identifying adaptive introgressed variants.
+
 ## Neural Development and the *FOXP2*-Containing Megadesert
 
 The largest introgression desert (12.69 Mb on CM078120.1) contains *FOXP2*, *NAV3*, *E2F7*, *ARID2*, and neuronal adhesion molecules *NRCAM* and *CNTN1*. *FOXP2* restriction is particularly notable given its recurrent identification as a barrier locus in vertebrate hybrid zones. In European crows, *FOXP2*-containing regions resist introgression despite genome-wide gene flow, and these regions overlap genomic islands maintaining plumage phenotypes that mediate assortative mating (Poelstra et al., 2014). In house mouse hybrid zones, *FOXP2*-linked loci show reduced introgression consistent with behavioral divergence (Payseur et al., 2004). In Darwin's finches, *FOXP2* resides near genomic regions controlling beak morphology, which directly affects song production and thus mate choice (Lamichhaney et al., 2016).
@@ -80,87 +85,47 @@ Critical next steps include transcriptomic analysis of brain, sensory organs, an
 
 ## References
 
-Ahmed, Z. M., et al. (2001). Mutations of the protocadherin gene PCDH15 cause Usher syndrome type 1F. *Am J Hum Genet* 69(1):25-34.
-
-Alibardi, L. (2016). Biological and molecular differences between scales and feathers. *Biol Rev* 91:221-243.
-
-Arnegard, M. E., et al. (2010). Sexual signal evolution outpaces ecological divergence during electric fish species radiation. *Am Nat* 176(3):335-356.
-
-Arnegard, M. E., et al. (2014). Genetics of ecological divergence during speciation. *Nature* 511:307-311.
-
-Baiz, M. D., et al. (2020). X-linked signature of reproductive isolation in humans is mirrored in a howler monkey hybrid zone. *J Hered* 111(5):419-428.
-
-Barton, N. H., & Bengtsson, B. O. (1986). The barrier to genetic exchange between hybridising populations. *Heredity* 57:357-376.
-
-Brusa, R., et al. (1995). Early-onset epilepsy and postnatal lethality associated with an editing-deficient GluR-B allele in mice. *Science* 270(5242):1677-1680.
-
-Caterina, M. J., et al. (1997). The capsaicin receptor: A heat-activated ion channel in the pain pathway. *Nature* 389:816-824.
-
-Cleves, P. A., et al. (2014). Evolved tooth gain in sticklebacks is associated with a cis-regulatory allele of Bmp6. *PNAS* 111(38):13912-13917.
-
-Cruickshank, T. E., & Hahn, M. W. (2014). Reanalysis suggests that genomic islands of speciation are due to reduced diversity, not reduced gene flow. *Mol Ecol* 23(13):3133-3157.
-
-Edenberg, H. J., et al. (2004). Variations in GABRA2 are associated with alcohol dependence. *Am J Hum Genet* 74(4):705-714.
-
-Enciso-Romero, J., et al. (2017). Evolution of novel mimicry rings facilitated by adaptive introgression in tropical butterflies. *Mol Ecol* 26:5160-5172.
-
-Engin, E., & Treit, D. (2007). The role of hippocampus in anxiety. *Eur J Pharmacol* 583(2-3):173-188.
-
-French, C. A., & Fisher, S. E. (2014). What can mice tell us about Foxp2 function? *Curr Opin Neurobiol* 28:72-79.
-
-Gavrilets, S. (2004). *Fitness Landscapes and the Origin of Species*. Princeton University Press.
-
-Gracheva, E. O., et al. (2010). Molecular basis of infrared detection by snakes. *Nature* 464:1006-1011.
-
-Hanifin, C. T., et al. (2008). Evolutionary history of tetrodotoxin resistance in salamanders. *Evolution* 62(12):2871-2883.
-
-Harris, K., & Nielsen, R. (2016). The genetic cost of Neanderthal introgression. *Genetics* 203(2):881-891.
-
-Holding, M. L., et al. (2016). Evolutionary correlates of venom resistance in rattlesnakes. *Toxicon* 122:158-165.
-
-Jones, F. C., et al. (2012). The genomic basis of adaptive evolution in threespine sticklebacks. *Nature* 484:55-61.
-
-Kubatko, L. S., et al. (2011). Inferring species-level phylogenies using multilocus data in *Sistrurus* rattlesnakes. *Syst Biol* 60(4):393-409.
-
-Lamichhaney, S., et al. (2016). A beak size locus in Darwin's finches facilitated character displacement. *Science* 352(6284):470-474.
-
-Mackessy, S. P. (2008). Venom composition in rattlesnakes. In *Biology of the Rattlesnakes* (pp. 495-510). Loma Linda University Press.
-
-Matsubara, K., et al. (2006). Evidence for different origin of sex chromosomes in snakes, birds, and mammals. *Chromosoma* 115:487-499.
-
-Meisel, R. P., & Connallon, T. (2013). The faster-X effect. *Trends Genet* 29(9):537-544.
-
-Merrill, R. M., et al. (2019). Mate preference across the speciation continuum in mimetic butterflies. *Evolution* 73(7):1253-1265.
-
-Nadeau, N. J., et al. (2012). Genomic islands of divergence in hybridizing *Heliconius* butterflies. *Phil Trans R Soc B* 367:343-353.
-
-Payseur, B. A., et al. (2004). Differential patterns of introgression across the X chromosome in house mice. *Evolution* 58(9):2064-2078.
-
-Poelstra, J. W., et al. (2014). The genomic landscape underlying phenotypic integrity in crows. *Science* 344(6190):1410-1414.
-
-Ravinet, M., et al. (2017). Interpreting the genomic landscape of speciation. *J Evol Biol* 30(8):1450-1477.
-
-Rieseberg, L. H., et al. (1999). Hybrid zones and the genetic architecture of a barrier to gene flow. *Genetics* 152:713-727.
-
-Sankararaman, S., et al. (2014). The genomic landscape of Neanderthal ancestry. *Nature* 507(7492):354-357.
-
-Schluter, D., & Conte, G. L. (2009). Genetics and ecological speciation. *PNAS* 106:9955-9962.
-
-Schuett, G. W. (1997). Body size and agonistic experience affect dominance in copperheads. *Anim Behav* 54:213-224.
-
-Schumer, M., et al. (2018). Natural selection interacts with recombination to shape hybrid genomes. *Science* 360(6389):656-660.
-
-Servedio, M. R., & Noor, M. A. F. (2003). The role of reinforcement in speciation. *Annu Rev Ecol Evol Syst* 34:339-364.
-
-Shaw, K. L., & Herlihy, D. P. (2000). Acoustic preference functions in Hawaiian crickets. *Proc R Soc B* 267:577-584.
-
-Sovic, M. G., et al. (2016). Origin of a cryptic lineage through isolation and historical hybridization. *Heredity* 117(5):358-366.
-
-Walsh, J., et al. (2016). Differential introgression in an avian hybrid zone. *BMC Evol Biol* 16:65.
-
-Yang, W., et al. (2020). Spatial variation in gene flow reveals causes of reproductive isolation in wall lizards. *Evolution* 74(7):1289-1300.
-
-Zancolli, G., et al. (2016). Is hybridization a source of adaptive venom variation in rattlesnakes? *Toxins* 8(6):188.
+Ahmed, Z. M., et al. (2001). Mutations of the protocadherin gene PCDH15 cause Usher syndrome type 1F. Am J Hum Genet 69(1):25-34.
+Alibardi, L. (2016). Biological and molecular differences between scales and feathers. Biol Rev 91:221-243.
+Arnegard, M. E., et al. (2010). Sexual signal evolution outpaces ecological divergence during electric fish species radiation. Am Nat 176(3):335-356.
+Arnegard, M. E., et al. (2014). Genetics of ecological divergence during speciation. Nature 511:307-311.
+Baiz, M. D., et al. (2020). X-linked signature of reproductive isolation in humans is mirrored in a howler monkey hybrid zone. J Hered 111(5):419-428.
+Barton, N. H., & Bengtsson, B. O. (1986). The barrier to genetic exchange between hybridising populations. Heredity 57:357-376.
+Brusa, R., et al. (1995). Early-onset epilepsy and postnatal lethality associated with an editing-deficient GluR-B allele in mice. Science 270(5242):1677-1680.
+Caterina, M. J., et al. (1997). The capsaicin receptor: A heat-activated ion channel in the pain pathway. Nature 389:816-824.
+Cleves, P. A., et al. (2014). Evolved tooth gain in sticklebacks is associated with a cis-regulatory allele of Bmp6. PNAS 111(38):13912-13917.
+Cruickshank, T. E., & Hahn, M. W. (2014). Reanalysis suggests that genomic islands of speciation are due to reduced diversity, not reduced gene flow. Mol Ecol 23(13):3133-3157.
+Edenberg, H. J., et al. (2004). Variations in GABRA2 are associated with alcohol dependence. Am J Hum Genet 74(4):705-714.
+Enciso-Romero, J., et al. (2017). Evolution of novel mimicry rings facilitated by adaptive introgression in tropical butterflies. Mol Ecol 26:5160-5172.
+Engin, E., & Treit, D. (2007). The role of hippocampus in anxiety. Eur J Pharmacol 583(2-3):173-188.
+French, C. A., & Fisher, S. E. (2014). What can mice tell us about Foxp2 function? Curr Opin Neurobiol 28:72-79.
+Gavrilets, S. (2004). Fitness Landscapes and the Origin of Species. Princeton University Press.
+Gracheva, E. O., et al. (2010). Molecular basis of infrared detection by snakes. Nature 464:1006-1011.
+Hanifin, C. T., et al. (2008). Evolutionary history of tetrodotoxin resistance in salamanders. Evolution 62(12):2871-2883.
+Harris, K., & Nielsen, R. (2016). The genetic cost of Neanderthal introgression. Genetics 203(2):881-891.
+Holding, M. L., et al. (2016). Evolutionary correlates of venom resistance in rattlesnakes. Toxicon 122:158-165.
+Jones, F. C., et al. (2012). The genomic basis of adaptive evolution in threespine sticklebacks. Nature 484:55-61.
+Kubatko, L. S., et al. (2011). Inferring species-level phylogenies using multilocus data in Sistrurus rattlesnakes. Syst Biol 60(4):393-409.
+Lamichhaney, S., et al. (2016). A beak size locus in Darwin's finches facilitated character displacement. Science 352(6284):470-474.
+Mackessy, S. P. (2008). Venom composition in rattlesnakes. In Biology of the Rattlesnakes (pp. 495-510). Loma Linda University Press.
+Matsubara, K., et al. (2006). Evidence for different origin of sex chromosomes in snakes, birds, and mammals. Chromosoma 115:487-499.
+Meisel, R. P., & Connallon, T. (2013). The faster-X effect. Trends Genet 29(9):537-544.
+Merrill, R. M., et al. (2019). Mate preference across the speciation continuum in mimetic butterflies. Evolution 73(7):1253-1265.
+Nadeau, N. J., et al. (2012). Genomic islands of divergence in hybridizing Heliconius butterflies. Phil Trans R Soc B 367:343-353.
+Payseur, B. A., et al. (2004). Differential patterns of introgression across the X chromosome in house mice. Evolution 58(9):2064-2078.
+Poelstra, J. W., et al. (2014). The genomic landscape underlying phenotypic integrity in crows. Science 344(6190):1410-1414.
+Ravinet, M., et al. (2017). Interpreting the genomic landscape of speciation. J Evol Biol 30(8):1450-1477.
+Rieseberg, L. H., et al. (1999). Hybrid zones and the genetic architecture of a barrier to gene flow. Genetics 152:713-727.
+Sankararaman, S., et al. (2014). The genomic landscape of Neanderthal ancestry. Nature 507(7492):354-357.
+Schluter, D., & Conte, G. L. (2009). Genetics and ecological speciation. PNAS 106:9955-9962.
+Schuett, G. W. (1997). Body size and agonistic experience affect dominance in copperheads. Anim Behav 54:213-224.
+Schumer, M., et al. (2018). Natural selection interacts with recombination to shape hybrid genomes. Science 360(6389):656-660.
+Servedio, M. R., & Noor, M. A. F. (2003). The role of reinforcement in speciation. Annu Rev Ecol Evol Syst 34:339-364.
+Shaw, K. L., & Herlihy, D. P. (2000). Acoustic preference functions in Hawaiian crickets. Proc R Soc B 267:577-584.
+Sovic, M. G., et al. (2016). Origin of a cryptic lineage through isolation and historical hybridization. Heredity 117(5):358-366.
+Walsh, J., et al. (2016). Differential introgression in an avian hybrid zone. BMC Evol Biol 16:65.
+Yang, W., et al. (2020). Spatial variation in gene flow reveals causes of reproductive isolation in wall lizards. Evolution 74(7):1289-1300.
+Zancolli, G., et al. (2016). Is hybridization a source of adaptive venom variation in rattlesnakes? Toxins 8(6):188.
 
 
 -----------------------------------------
