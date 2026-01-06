@@ -74,3 +74,5 @@ Gene → protein function table (representative genes from these regions)
 Interpretation (functional importance hypothesis; non-enrichment)
 
 Across the largest/gene-densest deserts, the recurring themes are developmental signaling (Wnt/PCP; retinoic acid), neuronal wiring/synaptic organization, core cell-cycle/genome regulation (p53 axis; spindle checkpoint; chromatin remodeling), and basic excitability/ion homeostasis. Those classes are frequently associated with dosage sensitivity / strong purifying selection, which is consistent with “introgression-resistant” regions.
+
+
