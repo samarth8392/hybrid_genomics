@@ -23,3 +23,111 @@ Approximate 95% confidence intervals for hwere calculated using a likelihood-rat
 Ancestry classification
 For descriptive purposes, windows were classified into ancestry categories based on estimated hybrid index values: windows with h<0.1were classified as parental population 1, windows with h>0.9 as parental population 2, and intermediate values as admixed. These thresholds were used solely for visualization and summary statistics and were not part of the likelihood model.
 This approach implements the core maximum-likelihood hybrid index framework described by Buerkle (2005), specifically the diagnostic-marker (fixed-differences) case. It also follows the conceptual foundation of genomic hybrid index estimation discussed by Gompert and Buerkle (2010) but represents a simplified implementation. In particular, the method does not incorporate genotype uncertainty, locus-specific weighting, explicit modeling of linkage disequilibrium, or Bayesian hierarchical structure. These simplifications were adopted to provide a conservative and computationally tractable assessment of local ancestry using strongly differentiated markers.
+
+
+----------------
+
+General figure description (hybrid index summary plots)
+
+Each panel shows the mean hybrid index (h) across the 11 Iowa samples along a single chromosome/contig (x‑axis = genomic position; y‑axis = hybrid index, scaled 0–1).
+
+iowa_samples
+
+CM078115.hybrid_index_summary
+
+CM078120.hybrid_index_summary
+
+Hybrid index (h) is estimated by maximum likelihood (Buerkle-style hybrid index), where h ranges from 0 to 1 and reflects ancestry along the chromosome (conceptually: 0 = Parent1-like, 1 = Parent2-like).
+
+calculate_hybrid_index_ml
+
+calculate_hybrid_index_ml
+
+Parent populations / colors (background shading):
+
+Blue = Parent1 (S. catenatus)
+
+Tan = Admixed
+
+Pink = Parent2 (S. tergeminus)
+
+hybrid_index_sliding_window
+
+plot_hybrid_index
+
+Black line (“Mean”): the mean h across the 11 Iowa individuals at each window midpoint (windowed across the chromosome).
+
+CM078115.hybrid_index_summary
+
+plot_hybrid_index
+
+Uncertainty bands: gray bands in the legend indicate ±1 SE and ±1 SD around the mean (as displayed in the plot legend).
+
+CM078115.hybrid_index_summary
+
+CM078120.hybrid_index_summary
+
+Horizontal dashed threshold lines: ancestry thresholds (used here as Parent1 threshold = 0.1 and Parent2 threshold = 0.9).
+
+plot_hybrid_index
+
+run_hybrid_script
+
+How the background category is assigned (CI-aware): windows are classified using the window’s confidence interval, i.e. Parent1-like if upper CI ≤ 0.1; Parent2-like if lower CI ≥ 0.9; otherwise admixed.
+
+plot_hybrid_index
+
+Red vertical dotted lines (“Peak” markers): the genomic positions of the top 10 windows with the highest mean h (i.e., the most Parent2-shifted windows in the mean profile), marked with red dotted lines.
+
+plot_hybrid_index
+
+plot_hybrid_index
+
+Yellow callout boxes: nearest annotated genes (typically top 1–2 shown, with “(+ more)” if additional genes fall within the flank distance) for each peak marker.
+
+CM078120.hybrid_index_summary
+
+CM078115.hybrid_index_summary
+
+plot_hybrid_index
+
+(Analysis settings commonly used for these plots: 50 kb windows, 10 kb step, minimum 10 AIMs per window.)
+
+hybrid_index_sliding_window
+
+run_hybrid_script
+
+Plausible explanation for “highly admixed chr1” vs an “introgression desert”
+Context: origin of the Iowa lineage
+
+Demographic inference for this system supports a history where the Iowa lineage evolved in allopatry and then experienced a hybridization/introgression event with S. tergeminus (secondary contact), with the timing on the order of ~23 kya (model-based estimate).
+
+hdy201656
+
+hdy201656
+
+hdy201656
+
+Why you can see two very different genomic patterns under that history
+
+Chromosome-wide mosaic admixture (e.g., chr1 example)
+Under secondary contact followed by recombination over many generations, introgressed ancestry becomes broken into many tracts distributed across the chromosome. If introgression was not strongly selected against on that chromosome (i.e., relatively few/weak barrier loci), the result can look like a broadly “admixed” chromosome in a sliding-window mean.
+
+A key technical/interpretive point: because you are plotting a mean across individuals, a “highly admixed” profile can also arise when different individuals carry different parental tracts at a given position (between-individual heterogeneity), even if no single individual is uniformly intermediate everywhere. (This is especially likely in older hybrid swarms.)
+
+Introgression desert (e.g., chr6 example)
+A long region where the mean hybrid index is consistently near Parent1 (and stays CI-classified as Parent1-like) is consistent with a genomic region that is resistant to introgression. Two biologically plausible mechanisms (not mutually exclusive) are:
+
+Selection against introgressed alleles (Dobzhansky–Muller incompatibilities and/or maladaptation), which purges heterospecific ancestry in that region after secondary contact.
+
+Reduced recombination (centromeric/low-recombination region) and/or structural variants (e.g., inversions) that maintain large linked blocks, making selection act on a broad region and producing an extended “desert.”
+
+Why chr1 might be especially admixed (plausible hypotheses)
+
+Higher effective recombination / fewer barrier loci on chr1 → introgressed tracts are more readily broken up and persist neutrally, yielding widespread mosaic ancestry in the population mean.
+
+Adaptive introgression on chr1 → one or more S. tergeminus alleles (or haplotypes) on chr1 could have been favored in the Iowa environment, increasing retention and spread of Parent2 ancestry across multiple chr1 windows.
+
+Among-individual heterogeneity (mean-of-11 effect) → chr1 might look “admixed” in the mean because different individuals carry different parental segments; this would be testable by checking the corresponding individual-level plots.
+
+Confidence: 0.8 (mechanisms are standard for secondary contact/hybrid zones, but attributing chr1 specifically to recombination vs adaptive introgression vs among-individual heterogeneity requires the individual panels and/or recombination/LD/structural variant evidence).
